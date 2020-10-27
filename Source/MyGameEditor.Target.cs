@@ -5,22 +5,10 @@ using System.Collections.Generic;
 
 public class MyGameEditorTarget : TargetRules
 {
-	public MyGameEditorTarget(TargetInfo Target)
+	public MyGameEditorTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Editor;
+		ExtraModuleNames.Add("MyGame");
+		ExtraModuleNames.Add("MyGameEditor");
 	}
-
-	//
-	// TargetRules interface.
-	//
-
-	public override void SetupBinaries(
-		TargetInfo Target,
-		ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
-		ref List<string> OutExtraModuleNames
-		)
-	{
-		OutExtraModuleNames.AddRange( new string[] { "MyGame" } );
-        OutExtraModuleNames.AddRange(new string[] { "MyGameEditor" });
-    }
 }

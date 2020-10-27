@@ -4,9 +4,12 @@ using UnrealBuildTool;
 
 public class MyGameEditor : ModuleRules
 {
-	public MyGameEditor(TargetInfo Target)
+	public MyGameEditor(ReadOnlyTargetRules Target) : base(Target)
 	{
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "MyGame" });
+        PCHUsage = PCHUsageMode.NoSharedPCHs;
+        PrivatePCHHeaderFile = "Public/MyGameEditor.h";
+
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "MyGame" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "AnimGraph", "BlueprintGraph" });
 

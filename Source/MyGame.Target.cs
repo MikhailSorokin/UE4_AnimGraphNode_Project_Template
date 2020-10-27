@@ -5,26 +5,19 @@ using System.Collections.Generic;
 
 public class MyGameTarget : TargetRules
 {
-	public MyGameTarget(TargetInfo Target)
+	public MyGameTarget(TargetInfo Target) : base(Target)
 	{
-		Type = TargetType.Game;
-	}
-
-	//
-	// TargetRules interface.
-	//
-
-	public override void SetupBinaries(
-		TargetInfo Target,
-		ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
-		ref List<string> OutExtraModuleNames
-		)
-	{
-		OutExtraModuleNames.AddRange( new string[] { "MyGame" } );
-
-        if (UEBuildConfiguration.bBuildEditor)
+		if (Type == TargetType.Editor)//4.16+
         {
-            OutExtraModuleNames.AddRange(new string[] { "MyGameEditor" });
-        }
-    }
+            ExtraModuleNames.AddRange( 
+                new string[]
+                {
+                    "ProjectCoreEditor"
+                });
+        } else {
+			Type = TargetType.Game;
+
+			ExtraModuleNames.Add("MyGame");
+		}
+	}
 }
